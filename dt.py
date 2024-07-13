@@ -18,7 +18,11 @@ y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 max_depth = 1
 mlflow.set_experiment("dt")
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+
+# mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+import dagshub
+dagshub.init(repo_owner='NaumanRafique12', repo_name='mlflow-Dagshub', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/NaumanRafique12/mlflow-Dagshub.mlflow")
 with mlflow.start_run(run_name="final_with_model_tag_code"): # Train the Random Forest classifier
     clf = DecisionTreeClassifier(max_depth=max_depth, random_state=42)
     clf.fit(X_train, y_train)
